@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package grpc;
+
+message Item {
+  int32 id = 1;
+  string item_id = 2;
+  string name = 3;
+  int32 category = 4;
+  string condition = 5;
+  int32 quantity = 6;
+  double sale_price = 7;
+  int32 seller_id = 8;
+  repeated string key_words = 9;
+}
+
+service ItemService {
+  rpc AddItem(Item) returns (AddItemResponse);
+  rpc UpdateItemPrice(UpdateItemPriceRequest) returns (UpdateItemPriceResponse);
+  rpc GetItem(GetItemRequest) returns (Item);
+  rpc GetItemsBySellerId(GetItemsBySellerIdRequest) returns (stream Item);
+  rpc UpdateItemQuantity(UpdateItemQuantityRequest) returns (UpdateItemQuantityResponse);
+  rpc GetItemsByCategoryAndKeywords(GetItemsByCategoryAndKeywordsRequest) returns (stream Item);
+}
+
+message AddItemResponse {
+  bool success = 1;
+  string item_id = 2;
+}
+
+message UpdateItemPriceRequest {
+  string item_id = 1;
+  double new_sale_price = 2;
+}
+
+message UpdateItemPriceResponse {
+  bool success = 1;
+}
+
+message GetItemRequest {
+  string item_id = 1;
+}
+
+message GetItemsBySellerIdRequest {
+  int32 seller_id = 1;
+}
+
+message UpdateItemQuantityRequest {
+  string item_id = 1;
+  int32 quantity_to_reduce = 2;
+}
+
+message UpdateItemQuantityResponse {
+  bool success = 1;
+}
+
+message GetItemsByCategoryAndKeywordsRequest {
+  int32 category_id = 1;
+  repeated string keywords_list = 2;
+}

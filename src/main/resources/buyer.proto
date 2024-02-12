@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+// Define the package name
+package grpc;
+
+// Define the Buyer message
+message Buyer {
+  // Define the fields of the Buyer message
+  int32 id = 1;
+  string name = 2;
+  int32 items_purchased = 3;
+}
+
+// Define gRPC service for Buyer DAO
+service BuyerService {
+  // RPC method to create a Buyer
+  rpc CreateBuyer(Buyer) returns (CreateBuyerResponse);
+
+  // RPC method to retrieve Buyer information
+  rpc GetBuyerInfo(GetBuyerInfoRequest) returns (Buyer);
+
+  // RPC method to update the number of items purchased by a Buyer
+  rpc UpdateNumItems(UpdateNumItemsRequest) returns (UpdateNumItemsResponse);
+}
+
+// Define message for response of CreateBuyer RPC
+message CreateBuyerResponse {
+  // Response message indicating success or failure
+  bool success = 1;
+}
+
+// Define message for request of GetBuyerInfo RPC
+message GetBuyerInfoRequest {
+  // Request message containing buyer ID
+  int32 buyer_id = 1;
+}
+
+// Define message for request of UpdateNumItems RPC
+message UpdateNumItemsRequest {
+  // Request message containing buyer ID and item count
+  int32 buyer_id = 1;
+  int32 count = 2;
+}
+
+// Define message for response of UpdateNumItems RPC
+message UpdateNumItemsResponse {
+  // Response message indicating success or failure
+  bool success = 1;
+}

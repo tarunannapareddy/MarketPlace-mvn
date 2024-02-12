@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package grpc;
+
+message Seller {
+  int32 id = 1;
+  string name = 2;
+  int32 positive_review_count = 3;
+  int32 negative_review_count = 4;
+  int32 total_sold = 5;
+}
+
+service SellerService {
+  rpc CreateSeller(Seller) returns (CreateSellerResponse);
+  rpc GetSellerInfo(GetSellerInfoRequest) returns (Seller);
+  rpc UpdateReviewCounts(UpdateReviewCountsRequest) returns (UpdateReviewCountsResponse);
+  rpc UpdateItemsSold(UpdateItemsSoldRequest) returns (UpdateItemsSoldResponse);
+}
+
+message CreateSellerResponse {
+  bool success = 1;
+}
+
+message GetSellerInfoRequest {
+  int32 seller_id = 1;
+}
+
+message UpdateReviewCountsRequest {
+  int32 seller_id = 1;
+  bool review = 2;
+}
+
+message UpdateReviewCountsResponse {
+  bool success = 1;
+}
+
+message UpdateItemsSoldRequest {
+  int32 seller_id = 1;
+  int32 items_sold = 2;
+}
+
+message UpdateItemsSoldResponse {
+  bool success = 1;
+}

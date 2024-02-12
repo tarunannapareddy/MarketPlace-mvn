@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package grpc;
+
+service CartService {
+  rpc GetCart(GetCartRequest) returns (GetCartResponse) {}
+  rpc UpdateCartQuantity(UpdateCartQuantityRequest) returns (UpdateCartQuantityResponse) {}
+  rpc DeleteCart(DeleteCartRequest) returns (DeleteCartResponse) {}
+}
+
+message GetCartRequest {
+  int32 buyer_id = 1;
+}
+
+message GetCartResponse {
+  int32 cart_id = 1;
+}
+
+message UpdateCartQuantityRequest {
+  int32 cart_id = 1;
+  string item_id = 2;
+  int32 quantity_change = 3;
+}
+
+message UpdateCartQuantityResponse {
+  bool success = 1;
+}
+
+message DeleteCartRequest {
+  int32 cart_id = 1;
+}
+
+message DeleteCartResponse {
+  bool success = 1;
+}
