@@ -3,12 +3,16 @@ package marketplace.dao;
 
 
 import marketplace.dbConnector.DBConnector;
+import marketplace.pojos.CartItem;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class CartDAO {
     private Connection conn;
@@ -105,6 +109,25 @@ public class CartDAO {
             System.out.println("exception while updating cart "+e);
         }
         return false;
+    }
+
+    public List<CartItem> getCartItems( int cartId){
+        String query = "SELECT * FROM cart_item WHERE cart_id = ?";
+        List<CartItem> cartItems = new ArrayList<>();
+        try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setInt(1, cartId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while(resultSet.next()) {
+                    cartItems.add(CartItem.builder()
+                            .id(resultSet.getInt("id")).cart_id(resultSet.getInt("cart_id"))
+                            .item_id(resultSet.getString("item_id")).quantity(resultSet.getInt("quantity")).build());
+                }
+            }
+        } catch (SQLException e){
+            System.out.println("error while updating item"+e);
+        }
+        return cartItems;
     }
 
 

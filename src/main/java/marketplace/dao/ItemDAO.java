@@ -68,7 +68,7 @@ public class ItemDAO {
 
     public Item getItem(String itemID) {
         // Retrieve the current quantity of the item
-        String query = "SELECT * FROM item WHERE item_id = ?";
+        String query = "SELECT * FROM item WHERE item_id = ? FOR UPDATE";
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setString(1, itemID);
 

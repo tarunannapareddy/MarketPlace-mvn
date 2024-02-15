@@ -31,6 +31,9 @@ public class  BuyerController {
     private RateItemHandler rateItemHandler;
 
     @Autowired
+    private PurchaseHandler purchaseHandler;
+
+    @Autowired
     private UpdateCartHandler updateCartHandler;
 
     static Session session = new Session(-1);
@@ -145,6 +148,16 @@ public class  BuyerController {
                 return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to reset cart");
             }
         }catch(Exception e) {
+            return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/purchase/{buyerId}")
+    public ResponseEntity<?> purchase(@PathVariable("buyerId") int buyerId){
+        try {
+            String transaction = purchaseHandler.purchase(buyerId);
+            return ResponseEntity.ok(transaction);
+        } catch (Exception e) {
             return (ResponseEntity<?>) ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
