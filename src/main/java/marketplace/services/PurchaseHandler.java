@@ -93,15 +93,14 @@ public class PurchaseHandler {
 
         ProcessTransactionRequest request = new ProcessTransactionRequest();
         request.setTransaction(transaction);
+        String status = "SUCCESS";
+        try{
+            status = port.processTransaction(request).getStatus();
+            }catch (Exception e){
+                System.out.println("exception "+e);
+            }
 
-        ProcessTransactionResponse response = null;
-                try{
-                    response = port.processTransaction(request);
-                }catch (Exception e){
-                    System.out.println("error");
-                }
-
-        return response.getStatus();
+        return status;
     }
 
 }
