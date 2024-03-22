@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package dbservice;
+
+message QueryRequest {
+  string table = 1;
+  string function = 2;
+  string input = 3;
+}
+
+service DBService {
+  rpc execute(QueryRequest) returns (ExecuteResponse);
+}
+
+message ExecuteResponse {
+  string response = 1;
+}

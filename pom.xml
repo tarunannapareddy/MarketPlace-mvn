@@ -158,27 +158,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxws-maven-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <id>wsimport-from-jdk</id>
-                        <goals>
-                            <goal>wsimport</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <wsdlUrls>
-                        <wsdlUrl>http://localhost:8081/ws/transaction.wsdl?wsdl</wsdlUrl>
-                    </wsdlUrls>
-                    <keep>true</keep>
-                    <packageName>soap.ws.client.generated</packageName>
-                    <sourceDestDir>src/main/java</sourceDestDir>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>

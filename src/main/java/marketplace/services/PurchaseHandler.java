@@ -10,7 +10,6 @@ import marketplace.pojos.CartItem;
 import marketplace.pojos.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import soap.ws.client.generated.*;
 
 import javax.xml.namespace.QName;
 import java.net.MalformedURLException;
@@ -85,22 +84,7 @@ public class PurchaseHandler {
     }
 
     String processTransaction(String transactionId, double price){
-        TransactionServiceService service = new TransactionServiceService();
-        TransactionService port = service.getTransactionServiceSoap11();
-        Transaction transaction = new Transaction();
-        transaction.setTransactionId(transactionId);
-        transaction.setPrice(price);
-
-        ProcessTransactionRequest request = new ProcessTransactionRequest();
-        request.setTransaction(transaction);
-        String status = "SUCCESS";
-        try{
-            status = port.processTransaction(request).getStatus();
-            }catch (Exception e){
-                System.out.println("exception "+e);
-            }
-
-        return status;
+        return "SUCCESS";
     }
 
 }

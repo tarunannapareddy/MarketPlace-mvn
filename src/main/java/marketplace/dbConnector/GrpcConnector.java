@@ -11,7 +11,7 @@ public class GrpcConnector {
 
     public synchronized static ManagedChannel getCustomerConnection() {
         if(managedChannel == null){
-            managedChannel =  ManagedChannelBuilder.forAddress("localhost", 8999).usePlaintext().build();
+            managedChannel =  ManagedChannelBuilder.forAddress("localhost", 4000).usePlaintext().build();
         }
         return managedChannel;
     }
