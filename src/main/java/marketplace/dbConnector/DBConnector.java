@@ -13,6 +13,7 @@ public class DBConnector {
     private static Connection productDBConnection =  null;
 
     private DBConnector() {
+
     }
 
     public synchronized static Connection getCustomerConnection() {
